@@ -13,7 +13,6 @@ describe('random date generater', () => {
   it('should be return middle day if random number is 0.5', () => {
     const randomNum = 0.5;
     const startDate = Date.parse('2022-01-23');
-    console.log(startDate);
     const endDate = Date.parse('2022-01-25');
     const resultDate = new Date(randomDate(randomNum, startDate, endDate));
     const year = resultDate.getFullYear();
