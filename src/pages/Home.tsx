@@ -1,5 +1,8 @@
+import { generateUniqueDate } from '../helpers';
+
 const Home = () => {
-  return <div>HOOME</div>;
+  const date = generateUniqueDate([]);
+  return <div>{date}</div>;
 };
 
 export default Home;
