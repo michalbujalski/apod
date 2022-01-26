@@ -1,10 +1,13 @@
 import './App.scss';
+import PictureProvider from './context/PictureContext';
 import Router from './routes';
 
 function App() {
   return (
     <div className="App">
-      <Router />
+      <PictureProvider>
+        <Router />
+      </PictureProvider>
     </div>
   );
 }
