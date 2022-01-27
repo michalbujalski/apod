@@ -1,5 +1,13 @@
-import { createContext, FC, useCallback, useContext, useState } from 'react';
+import {
+  createContext,
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useState
+} from 'react';
 import { Picture } from '../models';
+import { PersistantStore } from '../storage';
 
 interface ProductsContextType {
   saveAlreadySeen: (picture: Picture) => void;
@@ -23,9 +31,17 @@ interface Props {
   children: React.ReactNode;
 }
 
+const KEY_FAVORITES = 'favs';
+const KEY_ALREADY_SEEN = 'alreadySeen';
+
 const PictureProvider: FC<Props> = ({ children }) => {
-  const [alreadySeen, setAlreadySeen] = useState<Picture[]>([]);
-  const [favorites, setFavorites] = useState<Picture[]>([]);
+  const [alreadySeen, setAlreadySeen] = useState<Picture[]>(
+    JSON.parse(PersistantStore.get(KEY_FAVORITES) || '') || []
+  );
+  const [favorites, setFavorites] = useState<Picture[]>(
+    JSON.parse(PersistantStore.get(KEY_FAVORITES) || '') || []
+  );
+
   const saveAlreadySeen = (picture: Picture): void => {
     setAlreadySeen((oldArr) => {
       return [...oldArr, picture];
@@ -45,6 +61,12 @@ const PictureProvider: FC<Props> = ({ children }) => {
     },
     [favorites]
   );
+  useEffect(() => {
+    PersistantStore.save(KEY_FAVORITES, JSON.stringify(favorites));
+  }, [favorites]);
+  useEffect(() => {
+    PersistantStore.save(KEY_ALREADY_SEEN, JSON.stringify(alreadySeen));
+  }, [alreadySeen]);
   return (
     <PictureContext.Provider
       value={{
