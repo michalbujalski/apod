@@ -1,0 +1,16 @@
+.image-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  padding: 12px;
+  margin: 8px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  & > h1 {
+    font-size: 18px;
+  }
+  &__actions {
+    padding: 4px;
+  }
+}

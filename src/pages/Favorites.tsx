@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import ImageItem from '../components/ImageItem';
@@ -8,13 +9,17 @@ const Favorites = () => {
 
   const favs = useMemo(() => {
     return favorites.map((fav) => {
-      return <ImageItem picture={fav} onRemove={deleteFavorite} />;
+      return (
+        <Grid>
+          <ImageItem picture={fav} onRemove={deleteFavorite} />
+        </Grid>
+      );
     });
   }, [favorites, deleteFavorite]);
   return (
     <div>
       <Link to="/">Home</Link>
-      {favs}
+      <Grid container>{favs}</Grid>
     </div>
   );
 };
