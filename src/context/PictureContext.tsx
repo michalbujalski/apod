@@ -13,6 +13,7 @@ interface ProductsContextType {
   saveAlreadySeen: (picture: Picture) => void;
   saveFavorite: (picture: Picture) => void;
   deleteFavorite: (picture: Picture) => void;
+  isSaved: (date: string) => boolean;
   favorites: Picture[];
   alreadySeen: Picture[];
 }
@@ -21,6 +22,7 @@ const PictureContext = createContext<ProductsContextType>({
   saveAlreadySeen: (picture: Picture): void => {},
   saveFavorite: (picture: Picture): void => {},
   deleteFavorite: (picture: Picture): void => {},
+  isSaved: (date: string): boolean => false,
   favorites: [],
   alreadySeen: []
 });
@@ -61,6 +63,10 @@ const PictureProvider: FC<Props> = ({ children }) => {
     },
     [favorites]
   );
+  const isSaved = useCallback(
+    (date: string) => favorites.some((fav) => fav.date === date),
+    [favorites]
+  );
   useEffect(() => {
     PersistantStore.save(KEY_FAVORITES, JSON.stringify(favorites));
   }, [favorites]);
@@ -73,6 +79,7 @@ const PictureProvider: FC<Props> = ({ children }) => {
         saveAlreadySeen,
         saveFavorite,
         deleteFavorite,
+        isSaved,
         favorites,
         alreadySeen
       }}

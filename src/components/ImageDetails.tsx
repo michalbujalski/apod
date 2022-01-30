@@ -1,26 +1,23 @@
-import { Grid } from '@mui/material';
-import { FC } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { Picture } from '../models';
-import Field from './Field';
 import './ImageDetails.scss';
 import LazyImage from './LazyImage';
+import { usePictures } from '../context/PictureContext';
 
 interface Props {
   picture: Picture;
 }
 const ImageDetails: FC<Props> = ({ picture }) => {
+  const { isSaved, saveFavorite, deleteFavorite } = usePictures();
+
   return (
     <div className="image-details">
-      <h1>{picture.title}</h1>
+      <h1 className="title">{picture.title}</h1>
+      <div>
+        <h3 className="date">{picture.date}</h3>
+      </div>
       <LazyImage url={picture.url} alt={picture.title} />
-      <Grid container>
-        <Grid item xs={6}>
-          <Field label="Description" text={picture.explanation} />
-        </Grid>
-        <Grid item xs={6}>
-          <Field label="Date" text={picture.date} />
-        </Grid>
-      </Grid>
+      <p>{picture.explanation}</p>
     </div>
   );
 };

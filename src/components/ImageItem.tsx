@@ -9,12 +9,11 @@ interface Props {
 }
 
 const ImageItem: FC<Props> = ({ picture, onRemove }) => {
-  console.log(picture);
   return (
     <div className="image-item">
-      <h1>{picture.title}</h1>
+      <h1 className="title">{picture.title}</h1>
       <LazyImage url={picture.url} alt={picture.title} />
-      <div className="image-item__actions">
+      <div className="actions">
         <Button onClick={() => onRemove(picture)} variant="contained">
           Remove
         </Button>

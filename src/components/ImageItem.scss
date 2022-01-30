@@ -7,10 +7,14 @@
   padding: 12px;
   margin: 8px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-  & > h1 {
+  & > .title {
     font-size: 18px;
+    width: 326px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
-  &__actions {
+  & > .actions {
     padding: 4px;
   }
 }
