@@ -1,15 +1,19 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { BrowserRouter } from 'react-router-dom';
-import Favorites from '../pages/Favorites';
-import Home from '../pages/Home';
+import FavoritesPage from '../pages/Favorites.page';
+import HomePage from '../pages/Home.page';
+import ImageDetailsPage from '../pages/ImageDetails.page';
 
 const ApodRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/favorites" element={<Favorites />}></Route>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/favorites">
+          <Route path=":date" element={<ImageDetailsPage />} />
+          <Route index element={<FavoritesPage />} />
+        </Route>
+        <Route path="/" element={<HomePage />}></Route>
       </Routes>
     </BrowserRouter>
   );

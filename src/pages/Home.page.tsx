@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Refresh } from '@mui/icons-material';
-import { Button, CircularProgress } from '@mui/material';
+import { Button } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import { fetchApodPic } from '../api';
@@ -10,7 +10,8 @@ import { usePictures } from '../context/PictureContext';
 import { generateUniqueDate } from '../helpers';
 import { Picture } from '../models';
 
-import './Home.scss';
+import './Home.page.scss';
+import ContentWrapper from '../components/ContentWrapper';
 
 const Home = () => {
   const {
@@ -60,27 +61,6 @@ const Home = () => {
     }
   }, [isFav, saveFavorite, deleteFavorite, picture]);
 
-  const content = useMemo(() => {
-    if (isLoading) {
-      return (
-        <div className="progress-wrapper">
-          <CircularProgress />
-        </div>
-      );
-    }
-    if (isError) {
-      return (
-        <div className="error">
-          <div>There was an error fetching picture info</div>
-          <Button onClick={handleNext}>Retry</Button>
-        </div>
-      );
-    }
-    if (picture) {
-      return <ImageDetails picture={picture} />;
-    }
-  }, [isError, isLoading, picture, handleNext]);
-
   return (
     <div className="home">
       <NavBar
@@ -100,7 +80,13 @@ const Home = () => {
           </div>
         }
       />
-      {content}
+      <ContentWrapper
+        isLoading={isLoading}
+        isError={isError}
+        handleRetry={handleNext}
+      >
+        {picture ? <ImageDetails picture={picture} /> : <div>no content</div>}
+      </ContentWrapper>
     </div>
   );
 };

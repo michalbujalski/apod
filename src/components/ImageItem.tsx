@@ -14,8 +14,9 @@ const ImageItem: FC<Props> = ({ picture, onRemove }) => {
       <h1 className="title">{picture.title}</h1>
       <LazyImage url={picture.url} alt={picture.title} />
       <div className="actions">
-        <Button onClick={() => onRemove(picture)} variant="contained">
-          Remove
+        <Button onClick={() => onRemove(picture)}>Remove</Button>
+        <Button href={`/favorites/${picture.date}`} variant="contained">
+          Details
         </Button>
       </div>
     </div>
