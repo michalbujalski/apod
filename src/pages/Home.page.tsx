@@ -68,15 +68,15 @@ const Home = () => {
           <>
             {((picture && !isLoading) || isError) && (
               <Button sx={{ color: 'white' }} onClick={toggleFav}>
-                <span>Add to favs</span>
+                <span>{isFav ? 'Unsave' : 'Save'}</span>
                 {isFav ? <StarIcon /> : <StarBorderIcon />}
               </Button>
             )}
             <Button href="/favorites" sx={{ color: 'white' }}>
-              Favorites
+              Saved
             </Button>
             <Button sx={{ color: 'white' }} onClick={handleNext}>
-              <span>Get new</span> <Refresh />
+              <span>Next</span> <Refresh />
             </Button>
           </>
         }
