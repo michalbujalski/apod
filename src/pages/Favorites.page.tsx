@@ -4,6 +4,8 @@ import ImageItem from '../components/ImageItem';
 import NavBar from '../components/NavBar';
 import { usePictures } from '../context/PictureContext';
 
+import './Favorites.page.scss';
+
 const Favorites = () => {
   const { favorites, deleteFavorite } = usePictures();
 
@@ -17,9 +19,11 @@ const Favorites = () => {
     });
   }, [favorites, deleteFavorite]);
   return (
-    <div>
+    <div className="favorites-page">
       <NavBar backUrl="/" />
-      <Grid container>{favs}</Grid>
+      <Grid container justifyContent="center">
+        {favs}{' '}
+      </Grid>
     </div>
   );
 };

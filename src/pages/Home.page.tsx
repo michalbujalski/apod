@@ -65,19 +65,20 @@ const Home = () => {
     <div className="home">
       <NavBar
         actions={
-          <div>
+          <>
+            {((picture && !isLoading) || isError) && (
+              <Button sx={{ color: 'white' }} onClick={toggleFav}>
+                <span>Add to favs</span>
+                {isFav ? <StarIcon /> : <StarBorderIcon />}
+              </Button>
+            )}
             <Button href="/favorites" sx={{ color: 'white' }}>
               Favorites
             </Button>
             <Button sx={{ color: 'white' }} onClick={handleNext}>
-              <Refresh />
+              <span>Get new</span> <Refresh />
             </Button>
-            {((picture && !isLoading) || isError) && (
-              <Button sx={{ color: 'white' }} onClick={toggleFav}>
-                {isFav ? <StarIcon /> : <StarBorderIcon />}
-              </Button>
-            )}
-          </div>
+          </>
         }
       />
       <ContentWrapper
